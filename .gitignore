@@ -2,3 +2,5 @@
 test-*.log
 test-*.json
 *.exe
+/wpf/bin/
+/wpf/obj/

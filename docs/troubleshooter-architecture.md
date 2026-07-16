@@ -1,5 +1,29 @@
 # TroubleRepair architecture
 
+## WPFフロントエンド
+
+主画面は.NET 10 / WPFのCoffeeDiagnoseです。診断・修復の実体は従来どおりPowerShellモジュールに置き、WPFは表示と実行管理だけを担当します。既存のTroubleRepair.ps1はCLI兼WinFormsフォールバックとして残します。
+
+    TroubleRepair.bat
+    TroubleRepair.ps1                 # CLI / WinForms fallback
+    wpf/
+      CoffeeDiagnose.csproj
+      App.xaml
+      MainWindow.xaml
+      MainWindow.xaml.cs
+      ModuleViewModel.cs
+    tools/
+      get-troubleshooter-modules.ps1  # psd1 + ja.json -> JSON
+      invoke-troubleshooter-module.ps1
+    modules/
+      <module-id>/
+        module.psd1
+        handler.ps1
+
+WPFはget-troubleshooter-modules.ps1から有効なモジュールのJSON一覧を取得し、各カードを自動生成します。そのため新しいアプリを追加するときもWPFのXAMLやC#を変更する必要はありません。実行時は共通ランナーへモジュールID、モード、ログパス、結果JSONパスを渡します。
+
+権限境界もモジュール定義に従います。WPF自体は通常権限で起動し、RepairRequiresAdminがtrueの修復プロセスだけをUAC経由で起動します。診断や他モジュールまで管理者権限へ引き上げません。
+
 ## 目的
 
 アプリごとの障害知識を独立したモジュールにし、共通GUIから同じ操作で診断・修復できるようにする。

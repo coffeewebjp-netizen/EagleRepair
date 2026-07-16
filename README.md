@@ -1,5 +1,21 @@
 # TroubleRepair / EagleRepair
 
+## モダンWPF画面
+
+TroubleRepair.batをダブルクリックすると、.NET 10 / WPFで作成したCoffeeDiagnoseが開きます。
+
+- アプリごとのカードから「診断する」「ワンクリック修復」を実行
+- 実行状態を待機中・診断中・修復中・正常・要確認で表示
+- 実行ログを画面内で追跡し、コピーやログフォルダー表示が可能
+- 「すべて診断」は変更を加えない診断を順番に実行
+- 管理者権限はRepairRequiresAdminの修復を押したときだけ要求
+
+初回だけWPF版をReleaseビルドします。既にビルド済みなら即時起動し、.NET SDKがないPCやビルドに失敗した環境では既存のWinForms版へ自動的にフォールバックします。コマンドライン引数を付けた場合も従来のPowerShell CLIを使用します。
+
+手動ビルド:
+
+    dotnet build .\wpf\CoffeeDiagnose.csproj -c Release
+
 Eagleのライブラリ読み込み停止と、Dell Display and Peripheral Manager（DDPM）の内部接続不良を診断・修復するWindows向けトラブルシューティングツールです。
 アプリごとの処理をモジュールとして追加できるため、今後発生する別アプリの障害も同じ画面へ統合できます。
 
