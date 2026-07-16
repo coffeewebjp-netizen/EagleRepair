@@ -1,0 +1,36 @@
+{
+  "app": {
+    "title": "トラブル修復ツール",
+    "heading": "アプリのトラブルを診断・修復",
+    "intro": "対象アプリを選んでください。診断は変更を加えず、修復は確認後に実行します。"
+  },
+  "buttons": {
+    "diagnose": "診断",
+    "repair": "ワンクリック修復"
+  },
+  "status": {
+    "ready": "待機中",
+    "running": "{0} を処理しています…",
+    "succeeded": "正常に完了しました。",
+    "failed": "完了できませんでした（終了コード {0}）。",
+    "cancelled": "キャンセルされました。"
+  },
+  "dialogs": {
+    "confirmTitle": "修復の確認",
+    "repairConfirm": "{0} の診断と修復を実行します。続行しますか？"
+  },
+  "modules": {
+    "eagle": {
+      "name": "Eagle",
+      "description": "ライブラリ、Google Drive、キャッシュを診断し、安全な退避と再生成を行います。"
+    },
+    "ddpm": {
+      "name": "Dell Display and Peripheral Manager",
+      "description": "Dellモニター認識と内部通信を診断し、サービス再起動と検証済み起動を行います。"
+    },
+    "replaceMe": {
+      "name": "テンプレート",
+      "description": "新しいアプリ用モジュールのテンプレートです。"
+    }
+  }
+}
