@@ -27,7 +27,7 @@
                     </Border>
                     <StackPanel VerticalAlignment="Center">
                         <TextBlock Text="CoffeeDiagnose" Foreground="White" FontSize="25" FontWeight="Bold" />
-                        <TextBlock Text="アプリの不具合を診断し、安全な手順で復旧します"
+                        <TextBlock Text="アプリやデバイスの不具合を診断し、安全な手順で復旧します"
                                    Foreground="#AEB7CE" FontSize="13" Margin="0,3,0,0" />
                     </StackPanel>
                 </StackPanel>
@@ -45,7 +45,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel>
-                        <TextBlock Text="対象アプリ" FontSize="19" FontWeight="Bold" Foreground="{StaticResource TextBrush}" />
+                        <TextBlock Text="対象項目" FontSize="19" FontWeight="Bold" Foreground="{StaticResource TextBrush}" />
                         <TextBlock Text="まず診断で状態を確認できます。修復を選んだ場合だけ変更を行います。"
                                    Foreground="{StaticResource MutedTextBrush}" FontSize="12.5" Margin="0,5,0,0" />
                     </StackPanel>

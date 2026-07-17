@@ -135,13 +135,27 @@ function Get-GuiStatus([int]$ProcessId) {
 }
 
 function Get-ConnectedDellMonitors {
+    $startInfo = New-Object Diagnostics.ProcessStartInfo
+    $startInfo.FileName = 'pnputil.exe'
+    $startInfo.Arguments = '/enum-devices /class Monitor /connected'
+    $startInfo.UseShellExecute = $false
+    $startInfo.CreateNoWindow = $true
+    $startInfo.RedirectStandardOutput = $true
+    $startInfo.RedirectStandardError = $true
+    $process = New-Object Diagnostics.Process
+    $process.StartInfo = $startInfo
     try {
-        @(Get-PnpDevice -Class Monitor -PresentOnly -ErrorAction Stop |
-            Where-Object { $_.FriendlyName -match 'Dell' } |
-            Select-Object -ExpandProperty FriendlyName -Unique)
-    } catch {
+        [void]$process.Start()
+        $outputTask = $process.StandardOutput.ReadToEndAsync()
+        $errorTask = $process.StandardError.ReadToEndAsync()
+        if (-not $process.WaitForExit(15000)) {
+            try { $process.Kill() } catch {}
+            Write-Warning 'PnP monitor query timed out after 15 seconds.'
+            return @()
+        }
+        $process.WaitForExit()
         $names = New-Object 'System.Collections.Generic.HashSet[string]'
-        $output = (& pnputil.exe /enum-devices /class Monitor /connected 2>&1) -join [Environment]::NewLine
+        $output = $outputTask.Result + [Environment]::NewLine + $errorTask.Result
         foreach ($match in [regex]::Matches(
             $output,
             'Dell\s+(?:AW|SE|S|U|P|E|C|G)\d+[A-Z0-9-]*(?:\s+\([^)]*\))?',
@@ -150,6 +164,8 @@ function Get-ConnectedDellMonitors {
             [void]$names.Add($match.Value.Trim())
         }
         @($names | Sort-Object)
+    } finally {
+        $process.Dispose()
     }
 }
 

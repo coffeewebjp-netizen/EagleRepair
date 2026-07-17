@@ -1,8 +1,8 @@
 {
   "app": {
     "title": "トラブル修復ツール",
-    "heading": "アプリのトラブルを診断・修復",
-    "intro": "対象アプリを選んでください。診断は変更を加えず、修復は確認後に実行します。"
+    "heading": "アプリやデバイスのトラブルを診断・修復",
+    "intro": "対象項目を選んでください。診断は変更を加えず、修復は確認後に実行します。"
   },
   "buttons": {
     "diagnose": "診断",
@@ -23,6 +23,10 @@
     "eagle": {
       "name": "Eagle",
       "description": "ライブラリ、Google Drive、キャッシュを診断し、安全な退避と再生成を行います。"
+    },
+    "displayRecovery": {
+      "name": "外部ディスプレイ復旧",
+      "description": "スリープ復帰後に消えた24インチDellを、再検出・表示拡張・結果確認までワンクリックで復旧します。"
     },
     "ddpm": {
       "name": "Dell Display and Peripheral Manager",
